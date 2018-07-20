@@ -1,0 +1,33 @@
+<div class="row">
+	<div class="col-lg-4">
+		<%= form_for(@genre) do |f| %>
+	 		<%= f.label :genre, 'ジャンル名', class:'control-label', style:"padding-top:10px" %>
+	    	<%= f.text_field :genre , class:"form-control" %>
+	    	<%= f.label :priority, '優先度', class:'control-label',style:"padding-top:5px" %>
+	    	<%= f.text_field :priority, class:"form-control" %>
+	    	<%= f.submit '追加', class:"btn btn-primary",style:"margin-top:10px" %>
+		<% end %>
+		<%= link_to admins_top_path do %><div class="btn btn-success" style="margin-top:10px">管理画面へ戻る</div><% end %>
+	</div>
+	<div class="col-lg-8">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>ジャンル名</th> 
+					<th>優先度</th>
+					<th></th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<% @genres.each do |genre| %>
+				<tr>
+					<td><%= genre.genre %></td>
+					<td><%= genre.priority %></td>
+					<td><%= link_to "削除",genre_path(genre),method: :delete %></td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+</div>

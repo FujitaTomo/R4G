@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Ranking</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <div id="wrapper">
+    <header>
+      
+      <div class="header-top">
+        <div class="container">
+          <div class="logo_box">
+          <%= link_to image_tag("img/logo.png"), root_path %>
+          </div>
+        </div>
+      </div>
+ 
+      <nav class="navbar navbar-default">
+        <div class="container">
+            <ul class="nav navbar-nav">
+              <li class="dropdown headnav1">
+                <a data-toggle="dropdown" href="#">ジャンル<span class="caret"></span></a>
+                  <ul class="dropdown-menu" role="menu">
+                    <% Genre.all.order(:priority).each do |genre| %>
+                      <li><%= link_to genre_items_ranking_path(genre) do %>
+                          <%= genre.genre %><% end %>
+                      </li>
+                    <% end %>
+                  </ul>
+              </li>
+              <li class="dropdown headnav">
+                <a data-toggle="dropdown" href="#">機種名<span class="caret"></span></a>
+                  <ul class="dropdown-menu" role="menu">
+                    <% Hardware.all.order(:priority).each do |hard| %>
+                      <li><%= link_to hardware_items_ranking_path(hard) do %>
+                          <%= hard.hardware %><% end %>
+                      </li>
+                    <% end %>
+                  </ul>
+              </li>
+              <li class="headnav"><a>総合</a></li>
+              <li class="headnav"><a>過去ログ</a></li>
+              <li class="headnav"><a>お遊び</a></li>
+              <li class="headnav"><%= link_to "サインイン" ,new_user_session_path %></li>
+            </ul>
+          </div>
+      </nav>
+    </header>
+
+    	<div class="container">
+      <%= yield %>
+    </div>
+    <footer>
+      
+    </footer>
+  </div>
+  </body>
+</html>

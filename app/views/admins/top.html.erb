@@ -1,0 +1,54 @@
+<div class="row">
+	<div class="col-lg-3 col-lg-offset-2">
+    	<table class="table table-hover">
+    		<thead>
+    			<tr>
+    				<th>管理者機能一覧</th>
+    			</tr>
+    		</thead>
+
+    			<tbody>
+	    			<tr>
+	    				<td>
+	    					<% if admin_signed_in? %>
+								<%= link_to "ログアウト" ,destroy_admin_session_path  ,method: :delete %>
+							<% else %>
+								<%= link_to "ログイン" ,new_admin_session_path %>
+							<% end %>
+						</td>
+					</tr>
+
+		<% if admin_signed_in? %>
+	    			<tr>
+	    				<td><%= link_to "商品登録" ,new_item_path %>
+						</td>
+					</tr>
+					<tr>
+						<td><%= search_form_for @search do |f| %>
+							  <%= f.label :title_cont, "商品名検索(空欄で全取得)",class:'control-label' %>
+							  <%= f.search_field :title_cont, class:"form-control" %>
+							  <%= f.submit '検索', class:"btn btn-primary",style:"margin-top:10px" %>
+							<% end %>
+						</td>
+					</tr>
+					<tr>
+	    				<td><%= link_to "機種登録一覧" ,hardwares_path %>
+						</td>
+					</tr>
+					<tr>
+	    				<td><%= link_to "レーティング登録一覧" ,ratings_path %>
+						</td>
+					</tr>
+					<tr>
+	    				<td><%= link_to "ジャンル登録一覧" ,genres_path %>
+						</td>
+					</tr>
+					<tr>
+	    				<td><%= link_to "レーベル登録一覧" ,labels_path %>
+						</td>
+					</tr>
+		<% end %>
+				</tbody>
+		</table>
+	</div>
+</div>

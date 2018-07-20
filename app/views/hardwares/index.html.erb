@@ -1,0 +1,33 @@
+<div class="row">
+	<div class="col-lg-4">
+		<%= form_for(@hardware) do |f| %>
+	 		<%= f.label :hardware, '機種名', class:'control-label', style:"padding-top:10px" %>
+	    	<%= f.text_field :hardware , class:"form-control"%>
+	    	<%= f.label :priority, '優先度', class:'control-label',style:"padding-top:5px" %>
+	    	<%= f.text_field :priority, class:"form-control" %>
+	    	<%= f.submit '追加', class:"btn btn-primary",style:"margin-top:10px" %>
+		<% end %>
+		<%= link_to admins_top_path do %><div class="btn btn-success" style="margin-top:10px">管理画面へ戻る</div><% end %>
+	</div>
+	<div class="col-lg-8">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>機種名</th> 
+					<th>優先度</th>
+					<th></th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<% @hardwares.each do |hardware| %>
+				<tr>
+					<td><%= hardware.hardware %></td>
+					<td><%= hardware.priority %></td>
+					<td><%= link_to "削除",hardware_path(hardware),method: :delete %></td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+</div>
