@@ -1,67 +1,86 @@
 	<div class="row">
-		<%= attachment_image_tag @item, :image, fallback: "img/no_image.jpg", class:"col-lg-3" %>
-		<div class="col-lg-9">
-			
-			<div class="row">
-				<div class="col-lg-5"><p class="item_title"><%= @item.title %></p>
-					<table class="table">
-						<tbody>
-							<tr>
-								<th>機種</th>
-								<td><%= @item.hardware.hardware %></td>
-							</tr>
-							<tr>
-								<th>ジャンル</th>
-								<td><%= @item.genre.genre %></td>
-							</tr>
-							<tr>
-								<th>制作会社</th>
-								<td><%= @item.label.label %></td>
-							</tr>
-							<tr>
-								<th>発売日</th>
-								<td><%= @item.sale_date %></td>
-							</tr>
-							<tr>
-								<th>値段</th>
-								<td><%= @item.price %></td>
-							</tr>
-							<tr>
-								<th>rating</th>
-								<td><%= @item.rating.rating %></td>
-							</tr>
-							<tr>
-								<th>公式サイト</th>
-								<td><%= @item.official %></td>
-							</tr>
-							<tr>
-								<th>amazon</th>
-								<td><%= @item.amazon %></td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-
-				<div class="col-lg-7">
-					<div class="row">
+		<%= attachment_image_tag @item, :image, fallback: "img/no_image.jpg", class:"col-lg-2" %>
+				<div class="col-lg-10">
+					<p class="item_title"><%= @item.title %></p>
 					<table class="table">
 						<thead>
 							<tr>
-								<th class="col-lg-11">コメント</th>
-								<th class="col-lg-1">評価</th>
+								<th>機種</th>
+								<th>発売日</th>
+								<th>ジャンル</th>
+								<th>値段</th>
+								<th>制作会社</th>
+								<th>rating</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td><%= @item.hardware.hardware %></td>
+								<td><%= @item.sale_date %></td>
+								<td><%= @item.genre.genre %></td>
+								<td><%= @item.price %></td>
+								<td><%= @item.label.label %></td>
+								<td><%= @item.rating.rating %></td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="row">
+						<div class="col-lg-5">
+							<% if @item.official != nil %>
+							<%= link_to "公式サイト",@item.official,class:"btn btn-primary" %>
+							<% end %>
+							<% if @item.amazon != nil %>
+							<%= link_to "Amazon",@item.amazon,class:"btn btn-success" %>
+							<% end %>
+							<% if @item.steam != nil %>
+							<%= link_to "Steam",@item.steam,class:"btn btn-success" %>
+							<% end %>
+						</div>
+						<%= link_to "投票",new_item_vote_path(@item),class:"btn btn-primary col-lg-1" %>
+						<div class="col-lg-3">
+							<p style="font-size: 20px;">投票数は<%= @votes.count %>です</p>
+						</div>
+						<div class="col-lg-3">
+							<p style="font-size: 20px;">良い <%= @votes.where(favo:"1").count %></p>
+							<p style="font-size: 20px;">普通 <%= @votes.where(favo:"2").count %></p>
+							<p style="font-size: 20px;">悪い <%= @votes.where(favo:"3").count %></p>
+						</div>
+					</div>
+				</div>
+					
+
+	</div>
+		<br>
+
+				<div class="row">
+					<table class="table">
+						<thead>
+							<tr>
+								<th class="col-lg-2">ユーザー名</th>
+								<th class="col-lg-2">投票</th>
+								<th class="col-lg-8">コメント</th>
 							</tr>
 						</thead>
 						<tbody>
 							<% @votes.each do |vote| %>
 							<tr>
+								<td><%= User.find(vote.user_id).name %></td>
+								<td>
+									<% if vote.favo == 1 %>
+										良い　◯
+									<% elsif vote.favo == 2 %>
+										普通　ー
+									<% else %>
+										悪い　✖
+									<% end %>
+								</td>
 								<td><%= vote.comment %></td>
-								<td><%= vote.favo %></td>
 							</tr>
 							<% end %>
 						</tbody>
 					</table>
 				</div>
-			</div>
+
 		</div>
 	</div>
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180718091406) do
+ActiveRecord::Schema.define(version: 20180721062223) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(version: 20180718091406) do
     t.datetime "updated_at", null: false
     t.integer "hardware_id"
     t.string "image_id"
+    t.text "steam"
   end
 
   create_table "labels", force: :cascade do |t|

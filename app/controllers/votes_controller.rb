@@ -9,7 +9,7 @@ class VotesController < ApplicationController
   	@vote.user_id = current_user.id
   	@vote.item_id = params[:item_id]
   	@vote.save
-  	redirect_to root_path
+  	redirect_to item_path(params[:item_id])
   end
 
   def destroy
