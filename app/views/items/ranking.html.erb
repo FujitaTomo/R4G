@@ -1,0 +1,57 @@
+<h2>総合ランキング</h2>
+<div class="row">
+		<h4 class="col-lg-1"><%= link_to "今月",items_monthranking_path %></h4>
+		<h4 class="col-lg-1"><%= link_to "来月",items_nextmonthranking_path %></h4>
+		<h4 class="col-lg-1"><%= link_to "先月",items_prevmonthranking_path %></h4>
+</div>
+<div class="row">
+	<div class="col-lg-12">
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th class="col-lg-1">順位</th>
+					<th class="col-lg-5">タイトル</th>
+					<th>機種</th>
+					<th>ジャンル</th>
+					<th>発売日</th>
+					<th>投票</th>
+					<th>コメント</th>
+					<th>良い</th>
+					<th>普通</th>
+					<th>悪い</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<% @ranks.each.with_index(1) do |item , i| %>
+				<tr>
+					<td><h5><%= "第#{i}位" %></h5></td>
+					<td><h4><%= link_to item.title,item_path(item) %></h4></td>
+					<td><h5><%= item.hardware.hardware %></h5></td>
+					<td><h5><%= item.genre.genre %></h5></td>
+					<td><h5><%= item.sale_date %></h5></td>
+					<td><%= link_to "投票",new_item_vote_path(item),class:"btn btn-primary" %></td>
+					<td><h5><%= Vote.where(item_id: item.id).count %></h5></td>
+					<td><h5><%= Vote.where(item_id: item.id,favo:"1").count %></h5></td>
+					<td><h5><%= Vote.where(item_id: item.id,favo:"2").count %></h5></td>
+					<td><h5><%= Vote.where(item_id: item.id,favo:"3").count %></h5></td>
+				</tr>
+				<% end %>
+				<% @noranks.each do |item| %>
+				<tr>
+					<td><h5>ランク外</h5></td>
+					<td><h4><%= link_to item.title,item_path(item) %></h4></td>
+					<td><h5><%= item.hardware.hardware %></h5></td>
+					<td><h5><%= item.genre.genre %></h5></td>
+					<td><h5><%= item.sale_date %></h5></td>
+					<td><%= link_to "投票",new_item_vote_path(item),class:"btn btn-primary" %></td>
+					<td><h5><%= Vote.where(item_id: item.id).count %></h5></td>
+					<td><h5><%= Vote.where(item_id: item.id,favo:"1").count %></h5></td>
+					<td><h5><%= Vote.where(item_id: item.id,favo:"2").count %></h5></td>
+					<td><h5><%= Vote.where(item_id: item.id,favo:"3").count %></h5></td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+</div>

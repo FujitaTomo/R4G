@@ -4,10 +4,25 @@ Rails.application.routes.draw do
   devise_for :admins
 
   root 'tops#top'
+
   get 'admins/top'
-  get "items/ranking" => "items#ranking", as: "ranking"
+
+  
+
   get "genres/:id/items/ranking" => "genres#ranking", as:"genre_items_ranking"
+  get "genres/:id/items/monthrank" => "genres#monthrank", as:"genre_items_monthranking"
+  get "genres/:id/items/nextmonthrank" => "genres#nextmonthrank", as:"genre_items_nextmonthranking"
+  get "genres/:id/items/prevmonthrank" => "genres#prevmonthrank", as:"genre_items_prevmonthranking"  
+
   get "hardwares/:id/items/ranking" => "hardwares#ranking", as:"hardware_items_ranking"
+  get "hardwares/:id/items/monthrank" => "hardwares#monthrank", as:"hardware_items_monthranking"
+  get "hardwares/:id/items/nextmonthrank" => "hardwares#nextrank", as:"hardware_items_nextmonthranking"
+  get "hardwares/:id/items/prevmonthrank" => "hardwares#prevrank", as:"hardware_items_prevmonthranking"
+
+  get "items/ranking" => "items#ranking", as: "items_ranking"
+  get "items/monthrank" => "items#monthrank", as:"items_monthranking"
+  get "items/nextmonthrank" => "items#nextmonthrank", as:"items_nextmonthranking"
+  get "items/prevmonthrank" => "items#prevmonthrank", as:"items_prevmonthranking"
 
   resources :users  ,only:[:show,:index,:destroy]
 
