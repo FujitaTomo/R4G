@@ -11,19 +11,13 @@
   <body>
     <div id="wrapper">
     <header>
-      
-      <div class="header-top">
+      <nav class="navbar navbar-inverse">
         <div class="container">
-          <div class="logo_box">
-          <%= link_to image_tag("img/logo.png"), root_path %>
+          <div class="navbar-header">
+            <a class="navbar-brand"></a>
           </div>
-        </div>
-      </div>
- 
-      <nav class="navbar navbar-default">
-        <div class="container">
             <ul class="nav navbar-nav">
-              <li class="dropdown headnav1">
+              <li class="dropdown headnav">
                 <a data-toggle="dropdown" href="#">ジャンル<span class="caret"></span></a>
                   <ul class="dropdown-menu" role="menu">
                     <% Genre.all.order(:priority).each do |genre| %>
@@ -44,7 +38,6 @@
                   </ul>
               </li>
               <li class="headnav"><%= link_to "総合",items_ranking_path %></li>
-              <li class="headnav"><a>過去ログ</a></li>
               <li class="headnav"><a>お遊び</a></li>
               <li class="dropdown headnav">
                 <% if user_signed_in? %>
@@ -60,16 +53,22 @@
                     </ul>
                 <% end %>
               </li>
-          </div>
+            </ul>
+              <%= search_form_for @search do |f| %>
+                  <%= f.search_field :title_cont, class:"form-control navbar-form navbar-left",style:"margin-left:65px;" %>
+                  <%= f.submit '検索', class:"btn btn-primary",style:"margin:7px 0 0 10px" %>
+              <% end %>
+        </div>
       </nav>
     </header>
 
-    	<div class="container">
+    <div class="container">
       <%= yield %>
     </div>
+
     <footer>
       
     </footer>
-  </div>
+    </div>
   </body>
 </html>
