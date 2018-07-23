@@ -1,9 +1,4 @@
-<h2><%= Genre.find(params[:id]).genre %>ランキング</h2>
-<div class="row">
-		<h4 class="col-lg-1"><%= link_to "今月", genre_items_monthranking_path %></h4>
-		<h4 class="col-lg-1"><%= link_to "来月",genre_items_nextmonthranking_path %></h4>
-		<h4 class="col-lg-1"><%= link_to "先月",genre_items_prevmonthranking_path %></h4>
-</div>
+<h2>今月(<%= Date.today.month %>月)の<%= Genre.find(params[:id]).genre %>ランキング</h2>
 <div class="row">
 	<div class="col-lg-12">
 		<table class="table table-bordered">
