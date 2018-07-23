@@ -1,53 +1,61 @@
 	<div class="row">
 		<%= attachment_image_tag @item, :image, fallback: "img/no_image.jpg", class:"col-lg-2" %>
+		<p class="item_title col-lg-10"><%= @item.title %></p>
 				<div class="col-lg-4">
-					<p class="item_title"><%= @item.title %></p>
 					<table class="table">
-		
-						
 						<tbody>
-							<tr><th>機種</th>
-								<td><%= @item.hardware.hardware %></td></tr>
-								<tr>
+							<tr>
+								<th>機種</th>
+								<td><%= @item.hardware.hardware %></td>
+							</tr>
+							<tr>
 								<th>発売日</th>
-								<td><%= @item.sale_date %></td></tr>
-								<tr><th>ジャンル</th>
+								<td><%= @item.sale_date %></td>
+							</tr>
+								<tr>
+								<th>ジャンル</th>
 								<td><%= @item.genre.genre %></td>
 							</tr>
 							<tr>
-								<td><%= @item.price %></td><th>値段</th></tr>
-								<tr><th>制作会社</th>
-								<td><%= @item.label.label %></td></tr>
-								<tr>
+								<td><%= @item.price %></td>
+								<th>値段</th>
+							</tr>
+							<tr>
+								<th>制作会社</th>
+								<td><%= @item.label.label %></td>
+							</tr>
+							<tr>
 								<th>rating</th>
 								<td><%= @item.rating.rating %></td>
 							</tr>
 						</tbody>
 					</table>
 				</div>
-						<div class="col-lg-6">
+						<div class="col-lg-6 item-show-r">
 							<% if @item.official != nil %>
-							<%= link_to "公式サイト",@item.official,class:"btn btn-primary" %>
+								<%= link_to "公式サイト",@item.official,class:"btn btn-primary" %>
 							<% end %>
 							<% if @item.amazon != nil %>
-							<%= link_to "Amazon",@item.amazon,class:"btn btn-success" %>
+								<%= link_to "Amazon",@item.amazon,class:"btn btn-success" %>
 							<% end %>
 							<% if @item.steam != nil %>
-							<%= link_to "Steam",@item.steam,class:"btn btn-success" %>
+								<%= link_to "Steam",@item.steam,class:"btn btn-success" %>
 							<% end %>
-						<div class="row">
-						<div class="col-lg-3">
-							<p style="font-size: 20px;">投票数は<%= @votes.count %>です</p>
-						
-							<p style="font-size: 20px;">良い <%= @votes.where(favo:"1").count %></p>
-							<p style="font-size: 20px;">普通 <%= @votes.where(favo:"2").count %></p>
-							<p style="font-size: 20px;">悪い <%= @votes.where(favo:"3").count %></p>
+								<div class="row">
+								<br>
+									<div class="col-lg-7 item-show-m"><br>
+										<p style="font-size: 20px;">得票数は<%= @votes.count %>です</p>
+										<%= link_to "投票",new_item_vote_path(@item),class:"btn btn-primary" %>
+
+									</div>
+									<div class="col-lg-5"><br>
+										<p style="font-size: 20px;">良い <%= @votes.where(favo:"1").count %></p>
+										<p style="font-size: 20px;">普通 <%= @votes.where(favo:"2").count %></p>
+										<p style="font-size: 20px;">悪い <%= @votes.where(favo:"3").count %></p>
+									</div>
+								</div>
 						</div>
-					
-				</div>
-					
-
-
+</div>
 
 				<div class="row">
 					<table class="table table-bordered">
@@ -77,8 +85,4 @@
 						</tbody>
 					</table>
 				</div>
-
-		</div>
-	</div>
-
 
