@@ -1,2 +1,27 @@
-<h1>Users#index</h1>
-<p>Find me in app/views/users/index.html.erb</p>
+<div class="row">
+		<div class="col-lg-6">
+			<h2>ユーザー検索結果</h2>
+			<%= link_to admins_top_path do %><div class="btn btn-success" style="margin-bottom:10px">管理画面へ戻る</div>
+			<% end %>
+			<table class="table  table-bordered">
+				<thead>
+					<tr>
+						<th class="col-lg-2">ユーザーID</th>
+						<th class="col-lg-7">ユーザー名</th>
+						<th class="col-lg-1">削除</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<% @users.each do |user| %>
+					<tr>
+						<td><%= user.id %></td>
+						<td><%= link_to user.name,user_path(user) %></td>
+						<td><%= link_to "削除",user_path(user),method: :delete,class:"btn btn-danger" %>
+						</td>
+					</tr>
+					<% end %>
+				</tbody>
+			</table>
+		</div>
+	</div>
