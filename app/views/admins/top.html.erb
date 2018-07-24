@@ -1,5 +1,5 @@
 <div class="row">
-	<div class="col-lg-3 col-lg-offset-2">
+	<div class="col-lg-3 col-lg-offset-1">
     	<table class="table table-hover">
     		<thead>
     			<tr>
@@ -24,14 +24,6 @@
 						</td>
 					</tr>
 					<tr>
-						<td><%= search_form_for @search do |f| %>
-							  <%= f.label :title_cont, "商品名検索(空欄で全取得)",class:'control-label' %>
-							  <%= f.search_field :title_cont, class:"form-control" %>
-							  <%= f.submit '検索', class:"btn btn-primary",style:"margin-top:10px" %>
-							<% end %>
-						</td>
-					</tr>
-					<tr>
 	    				<td><%= link_to "機種登録一覧" ,hardwares_path %>
 						</td>
 					</tr>
@@ -51,4 +43,20 @@
 				</tbody>
 		</table>
 	</div>
+<% if admin_signed_in? %>
+	<div class="col-lg-3">
+		<%= search_form_for @usearch do |f| %>
+			<%= f.label :name_cont, "ユーザー名検索(空欄で全取得)",class:'control-label' %>
+			<%= f.search_field :name_cont, class:"form-control" %>
+			<%= f.submit '検索', class:"btn btn-primary",style:"margin-top:10px" %>
+		<% end %>
+	</div>
+	<div class="col-lg-3">
+		<%= search_form_for @search do |f| %>
+		  <%= f.label :title_cont, "商品名検索(空欄で全取得)",class:'control-label' %>
+		  <%= f.search_field :title_cont, class:"form-control" %>
+		  <%= f.submit '検索', class:"btn btn-primary",style:"margin-top:10px" %>
+		<% end %>
+	</div>
+<% end %>
 </div>
