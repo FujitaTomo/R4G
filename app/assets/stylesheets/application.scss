@@ -25,6 +25,7 @@
     display: block;
     clear: both;
 }
+/*header*/
 #wrapper {
   display: flex;
   flex-direction: column;
@@ -63,6 +64,11 @@ footer{
 	background-color:#BDBDBD ;
 	margin-top: auto;
 }
+/*item*/
+thead{
+	background-color: #222944;
+	color:white;
+}
 .item_title{
 	font-size: 30px;
 }
@@ -73,3 +79,4 @@ footer{
 .item-show-m{
 	border-top :1px solid #ddd;
 }
+

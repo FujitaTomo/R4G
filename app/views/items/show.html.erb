@@ -72,11 +72,11 @@
 								<td><%= User.find(vote.user_id).name %></td>
 								<td>
 									<% if vote.favo == 1 %>
-										良い　◯
+										<div style="color: blue;">良い　◯</div>
 									<% elsif vote.favo == 2 %>
-										普通　ー
+										<div style="color:green;">普通　ー</div>
 									<% else %>
-										悪い　✖
+										<div style="color:red;">悪い　✖</div>
 									<% end %>
 								</td>
 								<td><%= vote.comment %></td>

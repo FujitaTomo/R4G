@@ -7,8 +7,6 @@ Rails.application.routes.draw do
 
   get 'admins/top'
 
-  
-
   get "genres/:id/items/ranking" => "genres#ranking", as:"genre_items_ranking"
   get "genres/:id/items/monthrank" => "genres#monthrank", as:"genre_items_monthranking"
   get "genres/:id/items/nextmonthrank" => "genres#nextmonthrank", as:"genre_items_nextmonthranking"
@@ -24,7 +22,7 @@ Rails.application.routes.draw do
   get "items/nextmonthrank" => "items#nextmonthrank", as:"items_nextmonthranking"
   get "items/prevmonthrank" => "items#prevmonthrank", as:"items_prevmonthranking"
 
-  resources :users  ,only:[:show,:index,:destroy]
+  resources :users ,only:[:show,:index,:destroy]
 
   resources :items do
     resources :votes,only: [:create,:destroy,:new]
