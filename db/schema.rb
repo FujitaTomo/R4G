@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180721062223) do
+ActiveRecord::Schema.define(version: 20180724082016) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -91,7 +91,7 @@ ActiveRecord::Schema.define(version: 20180721062223) do
   end
 
   create_table "votes", force: :cascade do |t|
-    t.string "user_id"
+    t.integer "user_id"
     t.integer "item_id"
     t.integer "favo"
     t.text "comment"
