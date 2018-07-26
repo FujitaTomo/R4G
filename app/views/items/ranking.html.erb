@@ -25,7 +25,7 @@
 			<tbody>
 				<% @ranks.each.with_index(1) do |item , i| %>
 				<tr>
-					<td><h5><%= "第#{i}位" %></h5></td>
+					<td><h5 style="color: white;"><%= "第#{i}位" %></h5></td>
 					<td><h4><%= link_to item.title,item_path(item) %></h4></td>
 					<td><h5><%= item.hardware.hardware %></h5></td>
 					<td><h5><%= item.genre.genre %></h5></td>
@@ -39,7 +39,7 @@
 				<% end %>
 				<% @noranks.each do |item| %>
 				<tr>
-					<td><h5>ランク外</h5></td>
+					<td><h5  style="color: white;">ランク外</h5></td>
 					<td><h4><%= link_to item.title,item_path(item) %></h4></td>
 					<td><h5><%= item.hardware.hardware %></h5></td>
 					<td><h5><%= item.genre.genre %></h5></td>

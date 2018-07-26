@@ -2,7 +2,7 @@
 		<%= attachment_image_tag @item, :image, fallback: "img/no_image.jpg", class:"col-lg-2" %>
 		<p class="item_title col-lg-10"><%= @item.title %></p>
 				<div class="col-lg-4">
-					<table class="table">
+					<table class="table table-bordered">
 						<tbody>
 							<tr>
 								<th>機種</th>
@@ -17,8 +17,8 @@
 								<td><%= @item.genre.genre %></td>
 							</tr>
 							<tr>
-								<td><%= @item.price %></td>
 								<th>値段</th>
+								<td><%= @item.price %></td>
 							</tr>
 							<tr>
 								<th>制作会社</th>
@@ -31,7 +31,7 @@
 						</tbody>
 					</table>
 				</div>
-						<div class="col-lg-6 item-show-r">
+						<div class="col-lg-6">
 							<% if @item.official != nil %>
 								<%= link_to "公式サイト",@item.official,class:"btn btn-primary" %>
 							<% end %>
@@ -69,14 +69,14 @@
 						<tbody>
 							<% @votes.each do |vote| %>
 							<tr>
-								<td><%= User.find(vote.user_id).name %></td>
+								<td style="color: white;"><%= vote.user_name %></td>
 								<td>
 									<% if vote.favo == 1 %>
-										<div style="color: blue;">良い　◯</div>
+										<div style="color: #90daff;">良い　◯</div>
 									<% elsif vote.favo == 2 %>
-										<div style="color:green;">普通　ー</div>
+										<div style="color:#9fd2af;">普通　ー</div>
 									<% else %>
-										<div style="color:red;">悪い　✖</div>
+										<div style="color:#dc9898;">悪い　✖</div>
 									<% end %>
 								</td>
 								<td><%= vote.comment %></td>

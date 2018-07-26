@@ -25,6 +25,12 @@
     display: block;
     clear: both;
 }
+button, input, optgroup, select, textarea {
+    color: black;
+    }
+a{
+  color: white;
+}
 /*header*/
 #wrapper {
   display: flex;
@@ -49,6 +55,9 @@
 .navbar .nav li{
 text-align: center;
 }
+.navbar-inverse{
+  background-color: #171a21;
+}
 .navbar-inverse .navbar-nav > li > a {
     color: white;
 }
@@ -56,7 +65,8 @@ text-align: center;
 	width: 150px;
 }
 body{
-	background-color: white;
+	background-color: #0a2348de;
+  color: white;
 }
 footer{
 	height: 80px;
@@ -64,17 +74,25 @@ footer{
 	background-color:#BDBDBD ;
 	margin-top: auto;
 }
+/*TOP*/
+.top_main{
+  height: 500px;
+  background-color: black;
+}
 /*item*/
 thead{
-	background-color: #222944;
+	background-color: rgba(0, 0, 0, 0.4);
 	color:white;
+}
+tbody{
+  background-color:rgba( 0, 0, 0, 0.2 );
+  color: #c6d4df;
+}
+th{
+  color: white;
 }
 .item_title{
 	font-size: 30px;
-}
-.item-show-r{
-	border-left :1px solid #ddd;
-	border-right :1px solid #ddd;
 }
 .item-show-m{
 	border-top :1px solid #ddd;
