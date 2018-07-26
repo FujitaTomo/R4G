@@ -13,6 +13,9 @@ class VotesController < ApplicationController
   end
 
   def destroy
+    vote = Vote.find(params[:id])
+    vote.destroy
+    redirect_to item_path(vote.item_id)
   end
 
   private

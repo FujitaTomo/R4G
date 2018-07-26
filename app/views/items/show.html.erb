@@ -45,8 +45,11 @@
 								<br>
 									<div class="col-lg-7 item-show-m"><br>
 										<p style="font-size: 20px;">得票数は<%= @votes.count %>です</p>
-										<%= link_to "投票",new_item_vote_path(@item),class:"btn btn-primary" %>
-
+										<% if @item.voted_by?(current_user) %>
+											<%= link_to "投票解除",item_vote_path(@item,@vote),method: :delete,class:"btn btn-primary active" %>
+										<% else %>
+											<%= link_to "投票",new_item_vote_path(@item),class:"btn btn-primary" %>
+										<% end %>
 									</div>
 									<div class="col-lg-5"><br>
 										<p style="font-size: 20px;">良い <%= @votes.where(favo:"1").count %></p>
