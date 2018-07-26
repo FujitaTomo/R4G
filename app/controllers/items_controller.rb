@@ -17,7 +17,8 @@ class ItemsController < ApplicationController
 
   def show
     @item = Item.find(params[:id])
-    @votes = Vote.where(item_id: params[:id])
+    @vote = Vote.find_by(user_id: current_user.id,item_id: @item.id)
+    @votes = Vote.where(item_id: @item.id)
   end
 
   def edit
