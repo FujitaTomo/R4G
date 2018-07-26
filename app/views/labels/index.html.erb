@@ -8,7 +8,7 @@
 		<%= link_to admins_top_path do %><div class="btn btn-success" style="margin-top:10px">管理画面へ戻る</div><% end %>
 	</div>
 	<div class="col-lg-8">
-		<table class="table table-striped">
+		<table class="table">
 			<thead>
 				<tr>
 					<th>会社名</th>
@@ -20,7 +20,7 @@
 				<% @labels.each do |label| %>
 				<tr>
 					<td><%= label.label %></td>
-					<td><%= link_to "削除",label_path(label),method: :delete %></td>
+					<td><%= link_to "削除",label_path(label),method: :delete,class:"btn btn-danger" %></td>
 				</tr>
 				<% end %>
 			</tbody>
