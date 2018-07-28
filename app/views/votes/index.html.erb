@@ -1,0 +1,33 @@
+<h2>新規投票一覧</h2>
+	<div class="row"><div class="col-lg-12">
+		<table class="table table-bordered">
+			<thead>
+				<tr><th class="col-lg-2">ユーザー名</th>
+					<th class="col-lg-2">タイトル</th>
+					<th class="col-lg-1">投票</th>
+					<th class="col-lg-6">コメント</th>
+					<th class="col-lg-1">削除</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @votes.each do |vote| %>
+				<tr>
+					<td><%= vote.user_name %></td>
+					<td>タイトル</td>
+					<td>
+						<% if vote.favo == 1 %>
+							<div style="color: #90daff;;">良い　◯</div>
+						<% elsif vote.favo == 2 %>
+							<div style="color:#9fd2af;">普通　ー</div>
+						<% else %>
+							<div style="color:#dc9898;">悪い　✖</div>
+						<% end %>
+					</td>
+					<td><%= vote.comment %></td>
+					<td><%= link_to "投票削除", item_vote_path(vote.item_id,vote.id),method: :delete,class:"btn btn-primary active" %></td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+</div>

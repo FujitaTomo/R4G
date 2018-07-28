@@ -14,11 +14,11 @@
 								<td><%= Item.find(vote.item_id).title %></td>
 								<td>
 									<% if vote.favo == 1 %>
-										<div style="color: blue;">良い　◯</div>
+										<div style="color: #90daff;;">良い　◯</div>
 									<% elsif vote.favo == 2 %>
-										<div style="color:green;">普通　ー</div>
+										<div style="color:#9fd2af;">普通　ー</div>
 									<% else %>
-										<div style="color:red;">悪い　✖</div>
+										<div style="color:#dc9898;">悪い　✖</div>
 									<% end %>
 								</td>
 								<td><%= vote.comment %></td>

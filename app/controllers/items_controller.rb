@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_admin!, except: [:index,:show, :ranking, :monthrank, :nextmonthrank,:prevmonthrank]
+  before_action :authenticate_admin!, except: [:index,:show, :ranking, :monthrank, :nextmonthrank,:prevmonthrank,:newrelease]
   def new
     @item = Item.new
   end
@@ -63,6 +63,11 @@ class ItemsController < ApplicationController
     @item_ids = @items.pluck(:id)
     @ranks = @items.find(Vote.where(item_id: @item_ids).group(:item_id).order("count(item_id) desc").limit(100).pluck(:item_id))
     @noranks = @items - @ranks
+  end
+
+  def newrelease
+    @items = Item.order(created_at: :desc).limit(10)
+    @votes = Vote.order(created_at: :desc).limit(10)
   end
 
   private

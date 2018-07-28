@@ -1,0 +1,73 @@
+<h2>新規ゲームタイトル</h2>
+	<div class="row">
+		<div class="col-lg-12">
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th class="col-lg-4">タイトル</th>
+						<th>機種</th>
+						<th>ジャンル</th>
+						<th>発売日</th>
+						<th class="col-lg-1">投票</th>
+						<th>コメント</th>
+						<th>良い</th>
+						<th>普通</th>
+						<th>悪い</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<% @items.each do |item| %>
+					<tr>
+						<td><h4><%= link_to item.title,item_path(item) %></h4></td>
+						<td><h5><%= item.hardware.hardware %></h5></td>
+						<td><h5><%= item.genre.genre %></h5></td>
+						<td><h5><%= item.sale_date %></h5></td>
+						<td><% if user_signed_in? %>
+								<% if item.voted_by?(current_user) %>
+									<%= link_to "投票解除",item_vote_path(item.id,Vote.find_by(user_id: current_user.id,item_id: item.id)),method: :delete,class:"btn btn-primary active" %>
+								<% else %>
+									<%= link_to "投票",new_item_vote_path(item.id),class:"btn btn-primary" %>
+								<% end %>
+							<% end %></td>
+						<td><h5><%= Vote.where(item_id: item.id).count %></h5></td>
+						<td><h5><%= Vote.where(item_id: item.id,favo:"1").count %></h5></td>
+						<td><h5><%= Vote.where(item_id: item.id,favo:"2").count %></h5></td>
+						<td><h5><%= Vote.where(item_id: item.id,favo:"3").count %></h5></td>
+					</tr>
+					<% end %>
+					</tbody>
+			</table>
+		</div>
+	</div>
+	<h2>新規投票一覧</h2>
+	<div class="row"><div class="col-lg-12">
+		<table class="table table-bordered">
+			<thead>
+				<tr><th class="col-lg-2">ユーザー名</th>
+					<th class="col-lg-2">タイトル</th>
+					<th class="col-lg-1">投票</th>
+					<th class="col-lg-7">コメント</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @votes.each do |vote| %>
+				<tr>
+					<td><%= vote.user_name %></td>
+					<td><%= Item.find(vote.item_id).title %></td>
+					<td>
+						<% if vote.favo == 1 %>
+							<div style="color: #90daff;;">良い　◯</div>
+						<% elsif vote.favo == 2 %>
+							<div style="color:#9fd2af;">普通　ー</div>
+						<% else %>
+							<div style="color:#dc9898;">悪い　✖</div>
+						<% end %>
+					</td>
+					<td><%= vote.comment %></td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+</div>
