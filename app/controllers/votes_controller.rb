@@ -1,5 +1,5 @@
 class VotesController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except:[:index]
   before_action :abc, only:[:create]
   def new
   	@item = Item.find(params[:item_id])
@@ -16,11 +16,20 @@ class VotesController < ApplicationController
 
   def destroy
     vote = Vote.find(params[:id])
+    if admin_signed_in?
+      vote.destroy
+      redirect_to votes_path
+    else
       if vote.user != current_user
         redirect_to item_path(vote.item_id)
       end
     vote.destroy
     redirect_to item_path(vote.item_id)
+    end
+  end
+
+  def index
+    @votes = Vote.all
   end
 
   private

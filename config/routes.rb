@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   get "items/monthrank" => "items#monthrank", as:"items_monthranking"
   get "items/nextmonthrank" => "items#nextmonthrank", as:"items_nextmonthranking"
   get "items/prevmonthrank" => "items#prevmonthrank", as:"items_prevmonthranking"
+  get "items/newrelease" => "items#newrelease",as:"items_newrelease"
 
   resources :users ,only:[:show,:index,:destroy]
 
@@ -33,6 +34,7 @@ Rails.application.routes.draw do
     resources :ratings, only: [:create,:destroy, :index]
     resources :genres, only: [:create,:destroy, :index]
     resources :labels, only: [:create,:destroy, :index]
+    resources :votes, only:[:index]
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
