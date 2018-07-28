@@ -1,5 +1,6 @@
 class VotesController < ApplicationController
   before_action :authenticate_user!
+  before_action :abc, only:[:create]
   def new
   	@item = Item.find(params[:item_id])
 	@vote = Vote.new
@@ -15,6 +16,9 @@ class VotesController < ApplicationController
 
   def destroy
     vote = Vote.find(params[:id])
+      if vote.user != current_user
+        redirect_to item_path(vote.item_id)
+      end
     vote.destroy
     redirect_to item_path(vote.item_id)
   end
@@ -23,4 +27,10 @@ class VotesController < ApplicationController
   	def vote_params
   	  params.require(:vote).permit(:user_id,:item_id,:favo,:comment,:user_name)
   	end
+    def abc
+      if Vote.find_by(user_id: current_user.id,item_id: params[:item_id]).nil?
+      else
+        redirect_to item_path(params[:item_id])
+      end
+    end
 end
