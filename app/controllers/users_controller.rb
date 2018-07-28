@@ -1,7 +1,5 @@
 class UsersController < ApplicationController
-  def index
-  end
-
+  before_action :authenticate_admin!, except:[:show]
   def show
     @votes = Vote.where(user_id: params[:id])
   end

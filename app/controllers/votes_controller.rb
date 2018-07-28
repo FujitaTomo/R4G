@@ -1,4 +1,5 @@
 class VotesController < ApplicationController
+  before_action :authenticate_user!
   def new
   	@item = Item.find(params[:item_id])
 	@vote = Vote.new

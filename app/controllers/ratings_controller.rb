@@ -1,4 +1,6 @@
 class RatingsController < ApplicationController
+  before_action :authenticate_admin!
+  
   def index
   	@rating = Rating.new
   	@ratings = Rating.all

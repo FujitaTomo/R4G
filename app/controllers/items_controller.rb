@@ -1,4 +1,5 @@
 class ItemsController < ApplicationController
+  before_action :authenticate_admin!, except: [:index,:show, :ranking, :monthrank, :nextmonthrank,:prevmonthrank]
   def new
     @item = Item.new
   end
@@ -17,7 +18,6 @@ class ItemsController < ApplicationController
 
   def show
     @item = Item.find(params[:id])
-    @vote = Vote.find_by(user_id: current_user.id,item_id: @item.id)
     @votes = Vote.where(item_id: @item.id)
   end
 

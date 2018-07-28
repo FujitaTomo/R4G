@@ -1,4 +1,5 @@
 class HardwaresController < ApplicationController
+  before_action :authenticate_admin!, except:[:ranking,:monthrank,:nextmonthrank,:prevmonthrank]
   def index
   	@hardware = Hardware.new
   	@hardwares = Hardware.all

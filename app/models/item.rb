@@ -11,7 +11,9 @@ class Item < ApplicationRecord
    validates v, presence: true
 end
 
+
    def voted_by?(user)
    	votes.where(user_id: user.id).exists?
    end
+
 end
