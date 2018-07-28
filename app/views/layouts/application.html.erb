@@ -13,11 +13,12 @@
     <header>
       <nav class="navbar navbar-inverse">
         <div class="container">
-          <div class="navbar-header">
-            <a class="navbar-brand"></a>
+          <div class="row">
+          <div class="navbar-header col-lg-1">
+            <a class="navbar-brand"href="/"></a>
           </div>
-            <ul class="nav navbar-nav">
-              <li class="dropdown headnav">
+            <ul class="nav navbar-nav col-lg-10 row">
+              <li class="dropdown col-lg-2">
                 <a data-toggle="dropdown" href="#">ジャンル<span class="caret"></span></a>
                   <ul class="dropdown-menu" role="menu">
                     <% Genre.all.order(:priority).each do |genre| %>
@@ -27,7 +28,8 @@
                     <% end %>
                   </ul>
               </li>
-              <li class="dropdown headnav">
+
+              <li class="dropdown col-lg-2">
                 <a data-toggle="dropdown" href="#">機種名<span class="caret"></span></a>
                   <ul class="dropdown-menu" role="menu">
                     <% Hardware.all.order(:priority).each do |hard| %>
@@ -37,9 +39,11 @@
                     <% end %>
                   </ul>
               </li>
-              <li class="headnav"><%= link_to "総合",items_ranking_path %></li>
-              <li class="headnav"><a>お遊び</a></li>
-              <li class="dropdown headnav">
+
+              <li class="col-lg-2"><%= link_to "総合",items_ranking_path %></li>
+              <li class="col-lg-2"><a>お遊び</a></li>
+
+              <li class="dropdown col-lg-2">
                 <% if user_signed_in? %>
                   <a data-toggle="dropdown" href="#"><%= current_user.name %><span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
@@ -53,11 +57,18 @@
                     </ul>
                 <% end %>
               </li>
-            </ul>
+            
+              <div role="form col-lg-2" >
               <%= search_form_for @search do |f| %>
-                  <%= f.search_field :title_cont, class:"form-control navbar-form navbar-left",style:"margin-left:65px;" %>
-                  <%= f.submit '検索', class:"btn btn-primary",style:"margin:7px 0 0 10px" %>
+                  <%= f.search_field :title_cont, class:"form-control navbar-form navbar-left",size: "17x10" %>
+                    <!-- ナビゲーションバーにフォームを無理やり入れる為にボタンだけ別にする　-->
+                  </div>
+              </ul>
+                  <%= f.submit '検索', class:"btn btn-primary",style:"margin-top:7px; float:left;" %>
               <% end %>
+              
+            
+          </div>
         </div>
       </nav>
     </header>

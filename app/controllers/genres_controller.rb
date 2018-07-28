@@ -1,4 +1,5 @@
 class GenresController < ApplicationController
+  before_action :authenticate_admin!, except:[:ranking,:monthrank,:nextmonthrank,:prevmonthrank]
   def index
   	@genre = Genre.new
   	@genres = Genre.all
