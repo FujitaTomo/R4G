@@ -41,6 +41,10 @@ Rails.application.routes.draw do
     resources :votes,only: [:create,:destroy,:new]
   end
 
+  resources :boards ,only:[:index,:create,:show,:destroy] do
+    resources :comments,only:[:create,:destroy]
+  end
+
   scope :admin do
     resources :hardwares, only: [:create,:destroy, :index]
     resources :ratings, only: [:create,:destroy, :index]
