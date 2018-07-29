@@ -1,5 +1,17 @@
 Rails.application.routes.draw do
 
+  get 'comments/create'
+
+  get 'comments/destroy'
+
+  get 'boards/index'
+
+  get 'boards/create'
+
+  get 'boards/show'
+
+  get 'boards/destroy'
+
   devise_for :users
   devise_for :admins
 
