@@ -1,5 +1,17 @@
 Rails.application.routes.draw do
 
+  get 'comments/create'
+
+  get 'comments/destroy'
+
+  get 'boards/index'
+
+  get 'boards/create'
+
+  get 'boards/show'
+
+  get 'boards/destroy'
+
   devise_for :users
   devise_for :admins
 
@@ -27,6 +39,10 @@ Rails.application.routes.draw do
 
   resources :items do
     resources :votes,only: [:create,:destroy,:new]
+  end
+
+  resources :boards ,only:[:index,:create,:show,:destroy] do
+    resources :comments,only:[:create,:destroy]
   end
 
   scope :admin do

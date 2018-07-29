@@ -53,9 +53,9 @@
 			<tbody>
 				<% @votes.each do |vote| %>
 				<tr>
-					<td><%= vote.user_name %></td>
-					<td><%= Item.find(vote.item_id).title %></td>
-					<td>
+					<td style="color: white;"><h4><%= vote.user_name %></h4></td>
+					<td><h4><%= link_to Item.find(vote.item_id).title,item_path(vote.item_id) %></h4></td>
+					<td><h5>
 						<% if vote.favo == 1 %>
 							<div style="color: #90daff;;">良い　◯</div>
 						<% elsif vote.favo == 2 %>
@@ -63,8 +63,8 @@
 						<% else %>
 							<div style="color:#dc9898;">悪い　✖</div>
 						<% end %>
-					</td>
-					<td><%= vote.comment %></td>
+					</h5></td>
+					<td><h5><%= vote.comment %></h5></td>
 				</tr>
 				<% end %>
 			</tbody>
