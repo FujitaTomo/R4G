@@ -1,8 +1,123 @@
-<div class="col-lg-12 top_main">
-</div>
 <div class="row">
-	<div class="col-lg-12">
-		<a>aaaaaaa</a>
+	<div class="col-lg-2">
+		<ul class="list-group">
+			<li class="list-group-item" style="font-size: 13px;">ジャンル別ランキング</li>
+				<% @genres.each do |genre| %>
+				    <li class="list-group-item">
+			         	<%= link_to genre_items_ranking_path(genre) do %>
+			            <%= genre.genre %>
+			            <% end %>
+				    </li>
+				<% end %>
+		</ul>
+		<ul class="list-group">
+			<li class="list-group-item" style="font-size: 13px;">機種別ランキング</li>
+				<% @hardwares.each do |hard| %>
+				    <li class="list-group-item">
+			         	<%= link_to hardware_items_ranking_path(hard) do %>
+				        <%= hard.hardware %>
+				        <% end %>
+				    </li>
+				<% end %>
+		</ul>
+		<ul class="list-group">
+			<li class="list-group-item" style="font-size: 13px;">総合ランキング</li>
+			<li class="list-group-item"><%= link_to "今月",items_monthranking_path %></li>
+			<li class="list-group-item"><%= link_to "来月",items_nextmonthranking_path %></li>
+			<li class="list-group-item"><%= link_to "先月",items_prevmonthranking_path %></li>
+		</ul>
+	</div>
+	<div class="col-lg-10">
 	</div>
 </div>
+	<div class="row">
+	<h2>最新情報一覧</h2>
+		<h3>新規発売予定タイトル</h3>
+		<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th class="col-lg-4">タイトル</th>
+						<th>機種</th>
+						<th>ジャンル</th>
+						<th>発売日</th>
+						<th class="col-lg-1">投票</th>
+						<th>コメント</th>
+						<th>良い</th>
+						<th>普通</th>
+						<th>悪い</th>
+					</tr>
+				</thead>
 
+				<tbody>
+					<% @items.each do |item| %>
+					<tr>
+						<td><h4><%= link_to item.title,item_path(item) %></h4></td>
+						<td><h5><%= item.hardware.hardware %></h5></td>
+						<td><h5><%= item.genre.genre %></h5></td>
+						<td><h5><%= item.sale_date %></h5></td>
+						<td><% if user_signed_in? %>
+								<% if item.voted_by?(current_user) %>
+									<%= link_to "投票解除",item_vote_path(item.id,Vote.find_by(user_id: current_user.id,item_id: item.id)),method: :delete,class:"btn btn-primary active" %>
+								<% else %>
+									<%= link_to "投票",new_item_vote_path(item.id),class:"btn btn-primary" %>
+								<% end %>
+							<% end %></td>
+						<td><h5><%= Vote.where(item_id: item.id).count %></h5></td>
+						<td><h5><%= Vote.where(item_id: item.id,favo:"1").count %></h5></td>
+						<td><h5><%= Vote.where(item_id: item.id,favo:"2").count %></h5></td>
+						<td><h5><%= Vote.where(item_id: item.id,favo:"3").count %></h5></td>
+					</tr>
+					<% end %>
+					</tbody>
+			</table>
+	<h3>直近のゲーム投票</h3>
+		<table class="table table-bordered">
+			<thead>
+				<tr><th class="col-lg-2">ユーザー名</th>
+					<th class="col-lg-2">タイトル</th>
+					<th class="col-lg-1">投票</th>
+					<th class="col-lg-7">コメント</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @votes.each do |vote| %>
+				<tr>
+					<td style="color: white;"><h4><%= vote.user_name %></h4></td>
+					<td><h4><%= link_to Item.find(vote.item_id).title,item_path(vote.item_id) %></h4></td>
+					<td><h5>
+						<% if vote.favo == 1 %>
+							<div style="color: #90daff;;">良い　◯</div>
+						<% elsif vote.favo == 2 %>
+							<div style="color:#9fd2af;">普通　ー</div>
+						<% else %>
+							<div style="color:#dc9898;">悪い　✖</div>
+						<% end %>
+					</h5></td>
+					<td><h5><%= vote.comment %></h5></td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+	<h3>掲示板最新スレッド</h3>
+	<table class="table table-bordered">
+		<thead>
+			<tr>
+				<th class="col-lg-2">ユーザー名</th>
+				<th class="col-lg-7">タイトル</th>
+				<th class="col-lg-1">返信数</th>
+				<th class="col-lg-1">作成日時</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @boards.each do |board| %>
+			<tr>
+				<td><h4><%= User.find(board.user_id).name %></h4></td>
+				<td><h4><%= link_to board.board_title,board_path(board) %></h4></td>
+				<td><h5><%= Comment.where(board_id: board.id).count %></h5></td>
+				<td><h5><%= board.created_at.strftime("%Y-%m-%d") %></h5></td>
+				
+			</tr><% end %>
+		</tbody>
+	</table>
+
+	</div>
