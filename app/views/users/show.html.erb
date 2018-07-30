@@ -1,29 +1,89 @@
-<h2>投票一覧</h2>
-<div class="row">
-					<table class="table table-bordered">
-						<thead>
-							<tr>
-								<th class="col-lg-2">タイトル</th>
-								<th class="col-lg-1">投票</th>
-								<th class="col-lg-9">コメント</th>
-							</tr>
-						</thead>
-						<tbody>
-							<% @votes.each do |vote| %>
-							<tr>
-								<td><%= Item.find(vote.item_id).title %></td>
-								<td>
-									<% if vote.favo == 1 %>
-										<div style="color: #90daff;;">良い　◯</div>
-									<% elsif vote.favo == 2 %>
-										<div style="color:#9fd2af;">普通　ー</div>
-									<% else %>
-										<div style="color:#dc9898;">悪い　✖</div>
-									<% end %>
-								</td>
-								<td><%= vote.comment %></td>
-							</tr>
+<h2>マイページ</h2>
+
+	<h3>投票一覧</h3>
+	<div class="row">
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th class="col-lg-3">タイトル</th>
+					<th class="col-lg-1">投票</th>
+					<th class="col-lg-8">コメント</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @votes.each do |vote| %>
+				<tr>
+					<td><h4><%= link_to Item.find(vote.item_id).title,item_path(vote.item_id) %></h4></td>
+					<td><h5>
+						<% if vote.favo == 1 %>
+							<div style="color: #90daff;">良い　◯</div>
+						<% elsif vote.favo == 2 %>
+							<div style="color:#9fd2af;">普通　ー</div>
+						<% else %>
+							<div style="color:#dc9898;">悪い　✖</div>
+						<% end %>
+					</h5></td>
+					<td><%= vote.comment %></td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+
+	<h3>作成したスレッド一覧</h3>
+	<div class="row">
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th class="col-lg-2">ユーザー名</th>
+					<th class="col-lg-8">タイトル</th>
+					<th class="col-lg-1">返信数</th>
+					<th class="col-lg-1">作成日時</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @boards.each do |board| %>
+				<tr>
+					<td><h4><%= User.find(board.user_id).name %></h4></td>
+					<td><h4><%= link_to board.board_title,board_path(board) %></h4></td>
+					<td><h5><%= Comment.where(board_id: board.id).count %></h5></td>
+					<td><h5><%= board.created_at.strftime("%Y-%m-%d") %></h5></td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+
+	<h3>お問い合わせ状況</h3>
+	<div class="row">
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th class="col-lg-2">ユーザー名</th>
+						<th class="col-lg-2">カテゴリー</th>
+						<th class="col-lg-6">内容</th>
+						<th class="col-lg-1">状態</th>
+						<th class="col-lg-1">作成日時</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @contacts.each do |contact| %>
+					<tr>
+						<td><h4 style="color: white;"><%= User.find(contact.user_id).name %></h4></td>
+						<td><h5 style="color: white;"><%= contact.category %></h5></td>
+						<td><%= contact.message %>
+						</td>
+						<td><% if contact.situation == "対応済" %>
+								<h5 style="color: #90daff;">対応済</h5>
+							<% elsif contact.situation == "対応中" %>
+								<h5 style="color: #9fd2af;">対応中</h5>
+							<% else contact.situation == "未対応" %>
+								<h5 style="color: #dc9898;">未対応</h5>
 							<% end %>
-						</tbody>
-					</table>
-				</div>
+						</td>
+						<td><h5><%= contact.created_at.strftime("%Y-%m-%d") %></h5></td>
+					</tr>
+					<% end %>
+				</tbody>
+			</table>
+		</div>
