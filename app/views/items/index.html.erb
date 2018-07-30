@@ -1,5 +1,6 @@
+	<h2>検索結果</h2>
 	<div class="row">
-		<h2>検索結果</h2>
+
 		<% if admin_signed_in? %><!-- 管理者がログインしていたら　-->
 
 		<div class="col-lg-12">
@@ -30,13 +31,11 @@
 					<% end %>
 				</tbody>
 			</table>
-		</div>
-	</div>
+		</div></div>
 
 		<% else %>
 
 
-	<div class="col-lg-12">
 		<table class="table table-bordered">
 			<thead>
 				<tr>
@@ -74,6 +73,5 @@
 				<% end %>
 			</tbody>
 		</table>
-	</div>
 </div>
 		<% end %>

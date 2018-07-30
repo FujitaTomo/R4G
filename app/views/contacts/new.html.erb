@@ -1,0 +1,21 @@
+<h2>お問い合わせ</h2>
+	<div class="row">
+		<div class="col-lg-6">
+			<%= form_for(@contact) do |f| %>
+			<%= f.label :category, "カテゴリー", class:"control-label" %>
+			<br>
+			<%= f.select :category, [["カテゴリーを表示する", "nill"],["サイトについて","サイトについて"],["ゲームについて","ゲームについて"],["削除依頼","削除依頼"],["その他","その他"]], class: "form-control" %>
+
+			<br>
+
+			<%= f.label :message, "お問い合わせ内容", class:"control-label" %>
+			<%= f.text_area :message, rows: 10, cols: 100,class:"form-control" %>
+			<%= f.hidden_field :situation, :value => "未対応" %>
+
+	    	<%= f.submit '送信する', class:"btn btn-primary",style:"margin:10px 0 10px 0;" %>
+		<% end %>
+		</div>
+
+	</div>
+	<p>お問い合わせに対するご対応はユーザー様宛のメールにて行わせていただきます</p>
+

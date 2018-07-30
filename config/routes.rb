@@ -1,17 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'comments/create'
-
-  get 'comments/destroy'
-
-  get 'boards/index'
-
-  get 'boards/create'
-
-  get 'boards/show'
-
-  get 'boards/destroy'
-
   devise_for :users
   devise_for :admins
 
@@ -34,6 +22,12 @@ Rails.application.routes.draw do
   get "items/nextmonthrank" => "items#nextmonthrank", as:"items_nextmonthranking"
   get "items/prevmonthrank" => "items#prevmonthrank", as:"items_prevmonthranking"
   get "items/newrelease" => "items#newrelease",as:"items_newrelease"
+
+  get "contacts/tsumi" => "contacts#tsumi",as:"contacts_tsumi"
+  get "contacts/tnaka" => "contacts#tnaka",as:"contacts_tnaka"
+  get "contacts/tmi" => "contacts#tmi",as:"contacts_tmi"
+  
+  resources :contacts,onlu:[:new,:create,:index,:edit,:update]
 
   resources :users ,only:[:show,:index,:destroy]
 

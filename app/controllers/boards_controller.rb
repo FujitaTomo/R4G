@@ -2,7 +2,7 @@ class BoardsController < ApplicationController
 	before_action :authenticate_user!, except: [:index,:show,:destroy]
   def index
   	@board = Board.new
-  	@boards = Board.all
+  	@boards = Board.order('id DESC')
   end
 
   def create
