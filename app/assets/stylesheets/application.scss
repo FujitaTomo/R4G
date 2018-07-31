@@ -94,4 +94,14 @@ th{
 .item-show-m{
 	border-top :1px solid #ddd;
 }
-
+.list-group{
+  border-right:1px solid #ddd;
+}
+.list-group-item{
+  background-color: #293f5e;
+  border:none;
+  padding: 4px 15px;
+}
+.list-group-item > a{
+  color: #45a9dc;
+}
