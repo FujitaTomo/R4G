@@ -13,12 +13,12 @@ class ItemsController < ApplicationController
 
   def index
     @search = Item.ransack(params[:q])
-    @items = @search.result
+    @items = @search.result.page(params[:page]).per(20)
   end
 
   def show
     @item = Item.find(params[:id])
-    @votes = Vote.where(item_id: @item.id)
+    @votes = Vote.where(item_id: @item.id).page(params[:page]).per(20)
   end
 
   def edit

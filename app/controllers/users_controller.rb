@@ -8,7 +8,7 @@ class UsersController < ApplicationController
 
   def index
     @usearch = User.ransack(params[:q])
-    @users = @usearch.result
+    @users = @usearch.result.page(params[:page]).per(20)
   end
 
   def destroy

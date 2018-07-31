@@ -12,19 +12,19 @@ class ContactsController < ApplicationController
   end
 
   def index
-    @contacts = Contact.order('id DESC')
+    @contacts = Contact.order('id DESC').page(params[:page]).per(10)
   end
 
   def tsumi
-    @contacts = Contact.where(situation: "対応済").order('id DESC')
+    @contacts = Contact.where(situation: "対応済").order('id DESC').page(params[:page]).per(10)
   end
 
   def tnaka
-    @contacts = Contact.where(situation: "対応中").order('id DESC')
+    @contacts = Contact.where(situation: "対応中").order('id DESC').page(params[:page]).per(10)
   end
 
   def tmi
-    @contacts = Contact.where(situation: "未対応").order('id DESC')
+    @contacts = Contact.where(situation: "未対応").order('id DESC').page(params[:page]).per(10)
   end
 
   def edit

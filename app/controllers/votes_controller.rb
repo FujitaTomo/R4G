@@ -29,7 +29,7 @@ class VotesController < ApplicationController
   end
 
   def index
-    @votes = Vote.all
+    @votes = Vote.page(params[:page]).per(50)
   end
 
   private

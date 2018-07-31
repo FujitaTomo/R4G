@@ -59,3 +59,5 @@ gem "refile-mini_magick"
 gem 'bootstrap-sass'
 gem 'jquery-rails'
 gem "ransack"
+gem 'kaminari', '~> 0.17.0'
+gem 'kaminari-bootstrap', '~> 3.0.1'

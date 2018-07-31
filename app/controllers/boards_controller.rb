@@ -2,7 +2,7 @@ class BoardsController < ApplicationController
 	before_action :authenticate_user!, except: [:index,:show,:destroy]
   def index
   	@board = Board.new
-  	@boards = Board.order('id DESC')
+  	@boards = Board.order('id DESC').page(params[:page]).per(10)
   end
 
   def create
@@ -15,7 +15,7 @@ class BoardsController < ApplicationController
   def show
   	@board = Board.find(params[:id])
   	@comment = Comment.new
-  	@comments = Comment.where(board_id: @board.id)
+  	@comments = Comment.where(board_id: @board.id).page(params[:page]).per(20)
   end
 
   def destroy

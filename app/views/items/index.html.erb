@@ -30,7 +30,7 @@
 					</tr>
 					<% end %>
 				</tbody>
-			</table>
+			</table><%= paginate @items %>
 		</div></div>
 
 		<% else %>
@@ -72,6 +72,6 @@
 				</tr>
 				<% end %>
 			</tbody>
-		</table>
+		</table><%= paginate @items %>
 </div>
 		<% end %>
