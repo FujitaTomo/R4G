@@ -41,7 +41,7 @@
 					<td><h4><%= link_to item.title,item_path(item) %></h4></td>
 					<td><h5><%= item.hardware.hardware %></h5></td>
 					<td><h5><%= item.sale_date %></h5></td>
-					<td><%= link_to "投票",new_item_vote_path(item),class:"btn btn-primary" %></td>
+					<td><% if user_signed_in? %><%= link_to "投票",new_item_vote_path(item),class:"btn btn-primary" %><% end %></td>
 					<td><h5><%= Vote.where(item_id: item.id).count %></h5></td>
 					<td><h5><%= Vote.where(item_id: item.id,favo:"1").count %></h5></td>
 					<td><h5><%= Vote.where(item_id: item.id,favo:"2").count %></h5></td>

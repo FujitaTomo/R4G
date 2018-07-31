@@ -1,6 +1,7 @@
 <div class="row">
 	<div class="col-lg-2">
-		<ul class="list-group">
+		<!--サイドメニュー-->
+		<ul class="list-group"><br>
 			<li class="list-group-item" style="font-size: 13px;">ジャンル別ランキング</li>
 				<% @genres.each do |genre| %>
 				    <li class="list-group-item">
@@ -27,10 +28,69 @@
 			<li class="list-group-item"><%= link_to "先月",items_prevmonthranking_path %></li>
 		</ul>
 	</div>
+
+	<section class="col-lg-10"style="text-align: center;"><h2>総合ランキングTOP3</h2></section>
 	<div class="col-lg-10">
+			<% @ranks.each.with_index(1) do |item , i| %>
+				<div class="col-lg-12 row" style="border:1px solid #ddd;margin-bottom: 15px;"">
+						<p class="item_title col-lg-12">
+							<%= "第#{i}位  " %><%= item.title %>
+						</p>
+					<%= attachment_image_tag item, :image, fallback: "img/no_image.jpg", class:"col-lg-7" %>
+					<div class="col-lg-5">
+					<table class="table table-bordered">
+						<tbody>
+							<tr>
+								<th>機種</th>
+								<td><%= item.hardware.hardware %></td>
+							</tr>
+							<tr>
+								<th>発売日</th>
+								<td><%= item.sale_date %></td>
+							</tr>
+								<tr>
+								<th>ジャンル</th>
+								<td><%= item.genre.genre %></td>
+							</tr>
+							<tr>
+								<th>値段</th>
+								<td><%= item.price %></td>
+							</tr>
+							<tr>
+								<th>制作会社</th>
+								<td><%= item.label.label %></td>
+							</tr>
+							<tr>
+								<th>rating</th>
+								<td><%= item.rating.rating %></td>
+							</tr>
+						</tbody>
+					</table></div>
+					<div class="col-lg-5">
+					<% if item.official != nil %>
+								<%= link_to "公式サイト",item.official,class:"btn btn-primary" %>
+					<% end %>
+					<% if item.amazon != nil %>
+								<%= link_to "Amazon",item.amazon,class:"btn btn-success" %>
+					<% end %>
+					<% if item.steam != nil %>
+								<%= link_to "Steam",item.steam,class:"btn btn-success" %>
+					<% end %>
+						</div>
+		
+					
+					<div class="col-lg-5">
+						<p style="font-size: 20px;">得票数は<%= Vote.where(item_id: item.id).count %>です</p>
+					</div>
+					<div class="col-lg-5">
+						<p style="font-size: 20px;color: #90daff;">良い <%= Vote.where(item_id: item.id).where(favo:"1").count %></p></div>
+					<div class="col-lg-5"><p style="font-size: 20px;color:#9fd2af;">普通 <%= Vote.where(item_id: item.id).where(favo:"2").count %></p></div>
+					<div class="col-lg-5 col-lg-offset-7"><p style="font-size: 20px;color:#dc9898;">悪い <%= Vote.where(item_id: item.id).where(favo:"3").count %></p></div></div>
+				<% end %></div>
 	</div>
-</div>
-	<div class="row">
+<!--上部row閉じdiv -->
+
+<div class="row">
 	<h2>最新情報一覧</h2>
 		<h3>新規発売予定タイトル</h3>
 		<table class="table table-bordered">
