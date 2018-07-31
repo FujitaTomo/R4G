@@ -29,65 +29,85 @@
 		</ul>
 	</div>
 
-	<section class="col-lg-10"style="text-align: center;"><h2>総合ランキングTOP3</h2></section>
+	<section class="col-lg-10"style="text-align: center;"><h2>総合ランキングTOP5</h2></section>
+	
 	<div class="col-lg-10">
+		<div class="swiper-container">
+		<div class="swiper-wrapper">
 			<% @ranks.each.with_index(1) do |item , i| %>
-				<div class="col-lg-12 row" style="border:1px solid #ddd;margin-bottom: 15px;"">
+				<div class="swiper-slide">
+					<div class="col-lg-12 row">
+
 						<p class="item_title col-lg-12">
 							<%= "第#{i}位  " %><%= item.title %>
 						</p>
 					<%= attachment_image_tag item, :image, fallback: "img/no_image.jpg", class:"col-lg-7" %>
 					<div class="col-lg-5">
-					<table class="table table-bordered">
-						<tbody>
-							<tr>
-								<th>機種</th>
-								<td><%= item.hardware.hardware %></td>
-							</tr>
-							<tr>
-								<th>発売日</th>
-								<td><%= item.sale_date %></td>
-							</tr>
+						<table class="table table-bordered">
+							<tbody>
 								<tr>
-								<th>ジャンル</th>
-								<td><%= item.genre.genre %></td>
-							</tr>
-							<tr>
-								<th>値段</th>
-								<td><%= item.price %></td>
-							</tr>
-							<tr>
-								<th>制作会社</th>
-								<td><%= item.label.label %></td>
-							</tr>
-							<tr>
-								<th>rating</th>
-								<td><%= item.rating.rating %></td>
-							</tr>
-						</tbody>
-					</table></div>
+									<th>機種</th>
+									<td><%= item.hardware.hardware %></td>
+								</tr>
+								<tr>
+									<th>発売日</th>
+									<td><%= item.sale_date %></td>
+								</tr>
+									<tr>
+									<th>ジャンル</th>
+									<td><%= item.genre.genre %></td>
+								</tr>
+								<tr>
+									<th>値段</th>
+									<td><%= item.price %></td>
+								</tr>
+								<tr>
+									<th>制作会社</th>
+									<td><%= item.label.label %></td>
+								</tr>
+								<tr>
+									<th>rating</th>
+									<td><%= item.rating.rating %></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
 					<div class="col-lg-5">
-					<% if item.official != nil %>
-								<%= link_to "公式サイト",item.official,class:"btn btn-primary" %>
-					<% end %>
-					<% if item.amazon != nil %>
-								<%= link_to "Amazon",item.amazon,class:"btn btn-success" %>
-					<% end %>
-					<% if item.steam != nil %>
-								<%= link_to "Steam",item.steam,class:"btn btn-success" %>
-					<% end %>
-						</div>
-		
-					
+						<% if item.official != nil %>
+									<%= link_to "公式サイト",item.official,class:"btn btn-primary" %>
+						<% end %>
+						<% if item.amazon != nil %>
+									<%= link_to "Amazon",item.amazon,class:"btn btn-success" %>
+						<% end %>
+						<% if item.steam != nil %>
+									<%= link_to "Steam",item.steam,class:"btn btn-success" %>
+						<% end %>
+					</div>
+
 					<div class="col-lg-5">
 						<p style="font-size: 20px;">得票数は<%= Vote.where(item_id: item.id).count %>です</p>
 					</div>
 					<div class="col-lg-5">
 						<p style="font-size: 20px;color: #90daff;">良い <%= Vote.where(item_id: item.id).where(favo:"1").count %></p></div>
-					<div class="col-lg-5"><p style="font-size: 20px;color:#9fd2af;">普通 <%= Vote.where(item_id: item.id).where(favo:"2").count %></p></div>
+					<div class="col-lg-5 col-lg-offset-7"><p style="font-size: 20px;color:#9fd2af;">普通 <%= Vote.where(item_id: item.id).where(favo:"2").count %></p></div>
 					<div class="col-lg-5 col-lg-offset-7"><p style="font-size: 20px;color:#dc9898;">悪い <%= Vote.where(item_id: item.id).where(favo:"3").count %></p></div></div>
-				<% end %></div>
-	</div>
+		</div><% end %>
+	</div> 
+	<div class="swiper-pagination"></div>
+</div>
+<script src="swiper.js"></script>
+  <!-- Initialize Swiper -->
+  <script>
+    var swiper = new Swiper('.swiper-container', {
+      pagination: {
+        el: '.swiper-pagination',
+      },
+    });
+  </script>
+</div>
+</div>
+
+
 <!--上部row閉じdiv -->
 
 <div class="row">
