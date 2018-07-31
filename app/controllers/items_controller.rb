@@ -18,7 +18,7 @@ class ItemsController < ApplicationController
 
   def show
     @item = Item.find(params[:id])
-    @votes = Vote.where(item_id: @item.id)
+    @votes = Vote.where(item_id: @item.id).page(params[:page]).per(20)
   end
 
   def edit
