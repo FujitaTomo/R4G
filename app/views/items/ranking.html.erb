@@ -1,7 +1,7 @@
 <h2>総合ランキング</h2>
 <div class="row">
-		<section><h4 class="col-lg-1"><%= link_to "今月",items_monthranking_path %></h4></section>
-		<section><h4 class="col-lg-1"><%= link_to "来月",items_nextmonthranking_path %></h4></section>
-		<section><h4 class="col-lg-1"><%= link_to "先月",items_prevmonthranking_path %></h4></section>
+		<section><h4 class="col-lg-2"><%= link_to "今月発売",items_monthranking_path %></h4></section>
+		<section><h4 class="col-lg-2"><%= link_to "来月発売",items_nextmonthranking_path %></h4></section>
+		<section><h4 class="col-lg-2"><%= link_to "先月発売",items_prevmonthranking_path %></h4></section>
 </div>
 <%= render "items/list",ranks:@ranks,noranks:@noranks %>
