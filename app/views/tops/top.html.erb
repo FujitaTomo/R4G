@@ -39,7 +39,7 @@
 					<div class="col-lg-12 row">
 
 						<p class="item_title col-lg-12">
-							<%= "第#{i}位  " %><%= item.title %>
+							<%= "第#{i}位  " %><%= link_to item.title,item_path(item) %>
 						</p>
 					<%= attachment_image_tag item, :image, fallback: "img/no_image.jpg", class:"col-lg-7" %>
 					<div class="col-lg-5">
@@ -59,7 +59,7 @@
 								</tr>
 								<tr>
 									<th>値段</th>
-									<td><%= item.price %></td>
+									<td><%= item.price %>円</td>
 								</tr>
 								<tr>
 									<th>制作会社</th>

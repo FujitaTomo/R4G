@@ -10,7 +10,7 @@ class VotesController < ApplicationController
   	@vote = Vote.new(vote_params)
   	@vote.user_id = current_user.id
   	@vote.item_id = params[:item_id]
-  	@vote.save
+    @vote.save
   	redirect_to item_path(params[:item_id])
   end
 

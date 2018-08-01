@@ -1,9 +1,9 @@
 class UsersController < ApplicationController
   before_action :authenticate_admin!, except:[:show]
   def show
-    @votes = Vote.where(user_id: params[:id])
-    @boards = Board.where(user_id: params[:id])
-    @contacts = Contact.where(user_id: params[:id])
+       @votes = Vote.where(user_id: params[:id])
+       @boards = Board.where(user_id: params[:id])
+       @contacts = Contact.where(user_id: params[:id])
   end
 
   def index

@@ -8,8 +8,11 @@ class BoardsController < ApplicationController
   def create
   	board = Board.new(board_params)
   	board.user_id = current_user.id
-  	board.save
-  	redirect_to boards_path
+  	if board.save
+  	  redirect_to boards_path
+    else
+      redirect_to boards_path
+    end
   end
 
   def show
